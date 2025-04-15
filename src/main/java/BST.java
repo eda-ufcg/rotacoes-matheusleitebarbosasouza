@@ -8,24 +8,34 @@ public class BST {
     private int size;
 
     public boolean isAVL() {
-        //TODO: implementar
+        if(
         return false;
     }
 
     /**
      * Retorna a altura da árvore.
      */
-    public int height() {
-        //TODO implementar
-        return -1;
+    public int height(){
+        return 
     }
+    public int heightrecursive(){
+    
+    }
+    public int height(Node node) {
+        if (node == null){
+            return -1;
+        }else{ 
+            return 1 + max(height(node.left), height(node.right));
+        }
+    }
+
 
     /**
      * Retorna a altura de um determinado nó. Auxiliar
      * para recursão e para o balance.
      */
     private int height(Node node) {
-        return -1;
+        return node.height;
     }
 
     private int balance(Node node) {
@@ -65,16 +75,18 @@ public class BST {
         this.size += 1;
         if (isEmpty())
             this.root = new Node(element);
+            this.root.height = 0;
         else {
             
             Node aux = this.root;
-            
+            height = 0;
             while (aux != null) {
-                
+                height += 1;
                 if (element < aux.value) {
                     if (aux.left == null) { 
                         Node newNode = new Node(element);
                         aux.left = newNode;
+                        newNode.height = height;
                         newNode.parent = aux;
                         return;
                     }
@@ -84,6 +96,7 @@ public class BST {
                     if (aux.right == null) { 
                         Node newNode = new Node(element);
                         aux.right = newNode;
+                        newNode.height = height;
                         newNode.parent = aux;
                         return;
                     }
@@ -191,9 +204,10 @@ public class BST {
         
         if (isEmpty())
             this.root = new Node(element);
+            this.root.height = 0;
         else {
             Node aux = this.root;
-            recursiveAdd(aux, element);
+            recursiveAdd(aux, element, 0);
         }
         this.size += 1;
         
@@ -204,12 +218,14 @@ public class BST {
      * @param node a raíz da árvore.
      * @param element elemento a ser adicionado.
      */
-    private void recursiveAdd(Node node, int element) {
+    private void recursiveAdd(Node node, int element, int height) {
         
+
         if (element < node.value) {
             if (node.left == null) {
                 Node newNode = new Node(element);
                 node.left = newNode;
+                node.height = height;
                 newNode.parent = node;
                 return;
             }
@@ -218,10 +234,11 @@ public class BST {
             if (node.right == null) {
                 Node newNode = new Node(element);
                 node.right = newNode;
+                node.height = height;
                 newNode.parent = node;
                 return;
             }
-            recursiveAdd(node.right, element);
+            recursiveAdd(node.right, element, height+1);
         }
         
     }
@@ -401,6 +418,7 @@ public class BST {
 class Node {
     
     int value;
+    int height
     Node left;
     Node right;
     Node parent;
