@@ -16,12 +16,21 @@ public class BST {
      * Retorna a altura da árvore.
      */
     public int height(){
-        return 
+        return heightrecurvive(this.root);
     }
-    public int heightrecursive(){
-    
+    public int heightrecursive(Node node){
+        if(isEmpty()){
+            return -1;
+        }
+        int righti = heightrecursive(node.right);
+        int lefti = heightrecursive(node.left);
+        return 1+ Math.max(righti, lefti);
     }
-    public int height(Node node) {
+
+    /**
+     * Retorna a altura da arvore sem duas funções
+     */
+    public int height2(Node node) {
         if (node == null){
             return -1;
         }else{ 
@@ -38,8 +47,25 @@ public class BST {
         return node.height;
     }
 
-    private int balance(Node node) {
-        return -1;
+    private int balance(Node node){
+    updateHeight(z);
+    int balance = getBalance(z);
+    if (balance > 1) {
+        if (height(z.right.right) > height(z.right.left)) {
+            z = rotateLeft(z);
+        } else {
+            z.right = rotateRight(z.right);
+            z = rotateLeft(z);
+        }
+    } else if (balance < -1) {
+        if (height(z.left.left) > height(z.left.right))
+            z = rotateRight(z);
+        else {
+            z.left = rotateLeft(z.left);
+            z = rotateRight(z);
+        }
+    }
+    return z;
     }
 
     /**
