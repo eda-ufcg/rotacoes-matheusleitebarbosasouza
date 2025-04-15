@@ -1,8 +1,8 @@
 # Identificação
 
-* Nome: 
-* Email (@ccc): 
-* Matrícula: 
+* Nome: Matheus Leite Barbosa Souza
+* Email (@ccc): matheus.leite.barbosa.souza@ccc.ufcg.edu.br
+* Matrícula: 123210878
 
 # Roteiro: isAVL
 
